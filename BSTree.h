@@ -22,6 +22,13 @@ class BSTree{
 		};
 		BSTree::Node* get(int val);
 		BSTree::Node* getNode(int val, Node* prev);
+		BSTree::Node* findMaxInMinTree(Node* node);
+		bool insertNode(int val, Node* prev);
+		bool findNode(int val, Node* prev);
+		void removeLeaf(Node* node);
+		void shortCircuit(Node* node);
+		void promotion(Node* node);
+		void traverse(std::vector<int> &list, Node* node);
 		Node* root;
 
 	public:
@@ -29,13 +36,8 @@ class BSTree{
 		~BSTree();
 		bool empty();
 		bool insert(int val);
-		bool insertNode(int val, Node* prev);
 		bool find(int val);
-		bool findNode(int val, Node* prev);
 		bool remove(int val);
-		void removeLeaf(Node* node);
-		void shortCircuit(Node* node);
 		void sortedArray(std::vector<int> &list);
-		void traverse(std::vector<int> &list, Node* node);
 };
 #endif

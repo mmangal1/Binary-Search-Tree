@@ -95,7 +95,7 @@ int main(){
 	test.clear();
 
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*	cerr << "\n\tTest #10: Remove two branch node promoting a leaf node" << endl;
+	cerr << "\n\tTest #10: Remove two branch node promoting a leaf node" << endl;
 
 	assert(tree.remove(10));
 	tree.sortedArray(test);
@@ -122,7 +122,7 @@ int main(){
 	test.clear();
 
 	cerr << "\n\t========================PASS========================\n" << endl;
-	cerr << "\n\tTEST #13: Remove root with one branch" << endl;
+/*	cerr << "\n\tTEST #13: Remove root with one branch" << endl;
 
 	assert(tree.remove(3));
 	assert(tree.remove(2));

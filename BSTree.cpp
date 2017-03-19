@@ -106,6 +106,9 @@ bool BSTree::remove(int val){
 		else if(node->left == NULL || node->right == NULL){
 			shortCircuit(node);
 			return true;
+		}else{
+			promotion(node);
+			return true;
 		}
 	}
 
@@ -144,6 +147,25 @@ void BSTree::shortCircuit(BSTree::Node* node){
 	}
 	delete node;
 }
+
+void BSTree::promotion(BSTree::Node* node){
+	Node* promote = findMaxInMinTree(node);
+	node->data = promote->data;
+	if(promote->left == NULL){
+		removeLeaf(promote);
+	}else{
+		shortCircuit(promote);
+	}
+}
+
+BSTree::Node* BSTree::findMaxInMinTree(BSTree::Node* node){
+	Node* retVal = node->left;
+	while(retVal->right != NULL){
+		retVal = retVal->right;
+	}
+	return retVal;
+}
+
 void BSTree::sortedArray(std::vector<int> &list){
 	traverse(list, root);
 }
