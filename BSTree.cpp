@@ -104,7 +104,8 @@ bool BSTree::remove(int val){
 			return true;
 		}
 		else if(node->left == NULL || node->right == NULL){
-			
+			shortCircuit(node);
+			return true;
 		}
 	}
 
@@ -121,6 +122,28 @@ void BSTree::removeLeaf(BSTree::Node* node){
 	delete node;
 }
 
+void BSTree::shortCircuit(BSTree::Node* node){
+	if(node == node->parent->left){
+		if(node->left != NULL){
+			node->left->parent = node->parent;
+			node->parent->left = node->left;
+
+		}else{
+			node->right->parent = node->parent;
+			node->parent->left = node->right;
+		}
+	}else{
+		if(node->left != NULL){
+			node->left->parent = node->parent;
+			node->parent->right = node->left;
+		}
+		else{
+			node->right->parent = node->parent;
+			node->parent->right = node->right;
+		}
+	}
+	delete node;
+}
 void BSTree::sortedArray(std::vector<int> &list){
 	traverse(list, root);
 }

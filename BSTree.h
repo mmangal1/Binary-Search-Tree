@@ -34,6 +34,7 @@ class BSTree{
 		bool findNode(int val, Node* prev);
 		bool remove(int val);
 		void removeLeaf(Node* node);
+		void shortCircuit(Node* node);
 		void sortedArray(std::vector<int> &list);
 		void traverse(std::vector<int> &list, Node* node);
 };
