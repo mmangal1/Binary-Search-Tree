@@ -99,16 +99,21 @@ BSTree::Node* BSTree::getNode(int val, BSTree::Node* prev){
 bool BSTree::remove(int val){
 	BSTree::Node* node = get(val);
 	if(node != NULL){
-		if(node->left == NULL && node->right == NULL){
-			removeLeaf(node);
-			return true;
-		}
-		else if(node->left == NULL || node->right == NULL){
-			shortCircuit(node);
+		if(node == root){
+			promotion(root);
 			return true;
 		}else{
-			promotion(node);
-			return true;
+			if(node->left == NULL && node->right == NULL){
+				removeLeaf(node);
+				return true;
+			}
+			else if(node->left == NULL || node->right == NULL){
+				shortCircuit(node);
+				return true;
+			}else{
+				promotion(node);
+				return true;
+			}
 		}
 	}
 
@@ -130,7 +135,6 @@ void BSTree::shortCircuit(BSTree::Node* node){
 		if(node->left != NULL){
 			node->left->parent = node->parent;
 			node->parent->left = node->left;
-
 		}else{
 			node->right->parent = node->parent;
 			node->parent->left = node->right;
@@ -149,12 +153,26 @@ void BSTree::shortCircuit(BSTree::Node* node){
 }
 
 void BSTree::promotion(BSTree::Node* node){
-	Node* promote = findMaxInMinTree(node);
-	node->data = promote->data;
-	if(promote->left == NULL){
-		removeLeaf(promote);
+	Node* promote;
+	if(node->left != NULL){
+		promote = findMaxInMinTree(node);
+		node->data = promote->data;
+		if(promote->left == NULL){
+			removeLeaf(promote);
+		}else{
+			shortCircuit(promote);
+		}
+	}else if(node->right != NULL){
+		promote = findMinInMaxTree(node);
+		node->data = promote->data;
+		if(promote->right == NULL){
+			removeLeaf(promote);
+		}else{
+			shortCircuit(promote);
+		}
 	}else{
-		shortCircuit(promote);
+		delete node;
+		root = NULL;
 	}
 }
 
@@ -162,6 +180,14 @@ BSTree::Node* BSTree::findMaxInMinTree(BSTree::Node* node){
 	Node* retVal = node->left;
 	while(retVal->right != NULL){
 		retVal = retVal->right;
+	}
+	return retVal;
+}
+
+BSTree::Node* BSTree::findMinInMaxTree(BSTree::Node* node){
+	Node* retVal = node->right;
+	while(retVal->left != NULL){
+		retVal = retVal->left;
 	}
 	return retVal;
 }
@@ -174,6 +200,7 @@ void BSTree::traverse(std::vector<int> &list, BSTree::Node* node){
 	if(node){
 		traverse(list, node->left);
 		list.push_back(node->data);
+		cout << node->data << " " ;
 		traverse(list, node->right);
 	}
 }

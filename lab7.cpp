@@ -122,7 +122,7 @@ int main(){
 	test.clear();
 
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*	cerr << "\n\tTEST #13: Remove root with one branch" << endl;
+	cerr << "\n\tTEST #13: Remove root with one branch" << endl;
 
 	assert(tree.remove(3));
 	assert(tree.remove(2));
@@ -143,7 +143,7 @@ int main(){
 	assert(test.size() == 0);
 
 	cerr << "\n\t========================PASS========================\n" << endl;
-	cerr << "\n\tTEST #15: Deep copy for a tree of 100 random values" << endl;
+/*	cerr << "\n\tTEST #15: Deep copy for a tree of 100 random values" << endl;
 
 	for(int i = 0; i < 100; i++){
 		int value = rand() % 1000;

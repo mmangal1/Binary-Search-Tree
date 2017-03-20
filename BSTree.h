@@ -23,6 +23,7 @@ class BSTree{
 		BSTree::Node* get(int val);
 		BSTree::Node* getNode(int val, Node* prev);
 		BSTree::Node* findMaxInMinTree(Node* node);
+		BSTree::Node* findMinInMaxTree(Node* node);
 		bool insertNode(int val, Node* prev);
 		bool findNode(int val, Node* prev);
 		void removeLeaf(Node* node);
