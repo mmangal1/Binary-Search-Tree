@@ -2,7 +2,6 @@
 #define BSTREE_H
 
 #include <cstdlib>
-#include <algorithm>
 #include <vector>
 
 class BSTree{
@@ -29,11 +28,14 @@ class BSTree{
 		void removeLeaf(Node* node);
 		void shortCircuit(Node* node);
 		void promotion(Node* node);
-		void traverse(std::vector<int> &list, Node* node);
+		void inOrder(std::vector<int> &new_list, Node* node);
+		void preOrder(Node* node);
+		void postOrder(Node* node);
 		Node* root;
 
 	public:
 		BSTree();
+		BSTree(const BSTree &old_tree);
 		~BSTree();
 		bool empty();
 		bool insert(int val);

@@ -6,8 +6,13 @@ BSTree::BSTree(){
 	root = NULL;
 }
 
-BSTree::~BSTree(){
+BSTree::BSTree(const BSTree &old_tree){
+	root = NULL;
+	preOrder(old_tree.root);
+}
 
+BSTree::~BSTree(){
+	postOrder(root);
 }
 
 bool BSTree::insert(int val){
@@ -193,15 +198,29 @@ BSTree::Node* BSTree::findMinInMaxTree(BSTree::Node* node){
 }
 
 void BSTree::sortedArray(std::vector<int> &list){
-	traverse(list, root);
+	inOrder(list, root);
 }
 
-void BSTree::traverse(std::vector<int> &list, BSTree::Node* node){
+void BSTree::inOrder(std::vector<int> &list, BSTree::Node* node){
 	if(node){
-		traverse(list, node->left);
+		inOrder(list, node->left);
 		list.push_back(node->data);
-		cout << node->data << " " ;
-		traverse(list, node->right);
+		inOrder(list, node->right);
 	}
 }
 
+void BSTree::preOrder(BSTree::Node* node){
+	if(node){
+		insert(node->data);
+		preOrder(node->left);
+		preOrder(node->right);
+	}
+}
+
+void BSTree::postOrder(BSTree::Node* node){
+	if(node){
+		postOrder(node->left);
+		postOrder(node->right);
+		remove(node->data);
+	}
+}
